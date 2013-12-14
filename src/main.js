@@ -15,8 +15,8 @@ function start(){
   counter--;
   if(counter === 0){
     pirate = new Kinetic.Sprite({
-      x: 10,
-      y: 10,
+      x: 400,
+      y: 100,
       image: piratesheet,
       animation: 'walk',
       animations: pirateanimation,
