@@ -1,15 +1,3 @@
-var pirate_a = {
-  anims:[{name: 'idle', slides:[0]},
-         {name: 'walk', slides:[0,1,2,3,0,4,5,6]},
-         {name: 'attack', slides:[0,8,8,9,10,11,8,0]},
-         {name: 'death', slides:[0,12,13,14]},
-         {name: 'death_stay', slides:[14]}],
-         columns:4,rows:2,width:32,height:32};
-var orange_a = {
-  anims:[{name: 'idle', slides:[0,1,1,2,2,2,1,1,0,5,6,5]}],
-         columns:4,rows:2,width:16,height:16};
-var orangeanimation = AnimationSet(orange_a);
-var pirateanimation = AnimationSet(pirate_a);
 var piratesheet = new Image();
 piratesheet.onload = function(){
   start();
@@ -20,6 +8,9 @@ orangesheet.onload = function(){
 };
 piratesheet.src = 'assets/pirate.png';
 orangesheet.src = 'assets/orange.png';
+
+currentlevel={"env":{}};
+
 var counter = 2;
 var orange, pirate;
 function start(){
@@ -57,7 +48,7 @@ function start(){
 var stage = new Kinetic.Stage({
   container: 'container',
   width: 1000,
-  height: 400
+  height: 500
 });
 var background = new Kinetic.Layer();
 var pirate= new Kinetic.Layer();
