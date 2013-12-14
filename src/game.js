@@ -8,6 +8,13 @@ function init_game(){
     this.sprite.setScaleX(d);
     this.direction = d;
   };
+  player.die = function(){
+    this.sprite.setAnimation('death');
+    var self = this;
+    this.sprite.afterFrame(3,function(){
+      self.sprite.setAnimation('death_stay');
+    });
+  };
   currentlevel={"env":{}};
   init_bindings();
   interval = window.setInterval(loop,50);
