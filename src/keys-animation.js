@@ -14,7 +14,7 @@ var pirateanimation = AnimationSet(pirate_a);
 var keys = [];
 var bindingsDown = [], bindingsUp = [];
 var tempkeys = [];
-var left = 65, right = 68, space = 32;
+var bindings = {left: 65, right: 68, space: 32};
 function init_bindings(){
         document.onkeydown = function(evt){
           if(!keys[evt.keyCode] ){
@@ -23,7 +23,7 @@ function init_bindings(){
             if((!currentlevel.env.paused || evt.keyCode == pause) && bindingsDown[evt.keyCode])
               bindingsDown[evt.keyCode]();
           }
-        }
+        };
         document.onkeyup = function(evt){
           keys[evt.keyCode] = false;
           if((!currentlevel.env.paused || evt.keyCode == pause )){
@@ -33,24 +33,26 @@ function init_bindings(){
                       tempkeys.push(evt.keyCode);
                 }
         };
-        bindingsDown[space]=function(){
-          pirate.setAnimation('attack');
-          pirate.afterFrame(7,function(){
-            pirate.setAnimation('idle');
+        bindingsDown[bindings.space]=function(){
+          player.sprite.setAnimation('attack');
+          player.sprite.afterFrame(7,function(){
+            player.sprite.setAnimation('idle');
           });
         };
-        bindingsDown[left]=function(){
-          pirate.setAnimation('walk');
-          pirate.setScaleX(-1);
+        bindingsDown[bindings.left]=function(){
+          player.sprite.setAnimation('walk');
+          player.setDirection(-1);
         };
-        bindingsUp[left]=function(){
-          pirate.setAnimation('idle');  
+        bindingsUp[bindings.left]=function(){
+          if(player.direction === -1)
+            player.sprite.setAnimation('idle');  
         };
-        bindingsDown[right]=function(){
-          pirate.setAnimation('walk');
-          pirate.setScaleX(1);
+        bindingsDown[bindings.right]=function(){
+          player.sprite.setAnimation('walk');
+          player.setDirection(1);
         };
-        bindingsUp[right]=function(){
-          pirate.setAnimation('idle');  
+        bindingsUp[bindings.right]=function(){
+          if(player.direction === 1)
+            player.sprite.setAnimation('idle');  
         };
 }

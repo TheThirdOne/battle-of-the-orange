@@ -9,16 +9,14 @@ orangesheet.onload = function(){
 piratesheet.src = 'assets/pirate.png';
 orangesheet.src = 'assets/orange.png';
 
-currentlevel={"env":{}};
-
 var counter = 2;
 var orange, pirate;
 function start(){
   counter--;
   if(counter === 0){
     pirate = new Kinetic.Sprite({
-      x: 300,
-      y: 300,
+      x: 10,
+      y: 10,
       image: piratesheet,
       animation: 'walk',
       animations: pirateanimation,
