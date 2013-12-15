@@ -1,6 +1,7 @@
 var player, enemies, currentlevel, interval;
-function Player(sprite){
+function Entity(sprite,ai){
   this.sprite = sprite;
+  this.ai = ai;
   this.direction = 1;
   this.setDirection = function(d){
     if(d === this.direction)
@@ -18,13 +19,15 @@ function Player(sprite){
   };
 }
 function init_game(){
-  player = new Player(pirate);
+  player = new Entity(red,function(){
+    if(this.sprite.getAnimation()==='walk'){
+    this.sprite.setX(this.sprite.getX()+4*this.direction)
+  }
+  });
   currentlevel={"env":{}};
   init_bindings();
   interval = window.setInterval(loop,50);
 }
 function loop(){
-  if(player.sprite.getAnimation()==='walk'){
-    player.sprite.setX(player.sprite.getX()+4*player.direction)
-  }
+  player.ai();
 }
