@@ -24,7 +24,7 @@ function makeEnemy(){
   var frame = Math.floor(Math.random()*pirateanimation.walk.length);
   var sprite = new Kinetic.Sprite({
     x: i,
-    y: 100,
+    y: 200,
     image: piratesheet,
     animation: 'walk',
     animations: pirateanimation,
@@ -46,8 +46,8 @@ function makeEnemy(){
 }
 function init_game(){
   pirateship = new Kinetic.Image({
-          x: -250,
-          y: -160,
+          x: -500,
+          y: -450,
           image: shipsheet,
           width: shipsheet.width,
           height: shipsheet.height
@@ -59,7 +59,7 @@ function init_game(){
   }
   red = new Kinetic.Sprite({
     x: 400,
-    y: 100,
+    y: 200,
     image: redsheet,
     animation: 'idle',
     animations: redanimation,
