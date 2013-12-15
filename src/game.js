@@ -20,6 +20,8 @@ function Entity(sprite,ai){
 }
 function makeEnemy(){
   var i = Math.floor(Math.random()*400);
+  var speed =  Math.random()*2+3;
+  var frame = Math.floor(Math.random()*pirateanimation.walk.length);
   var sprite = new Kinetic.Sprite({
     x: i,
     y: 100,
@@ -27,18 +29,25 @@ function makeEnemy(){
     animation: 'walk',
     animations: pirateanimation,
     frameRate: 8,
-    index: 0,
+    index: frame,
     width: 128,
     height:128
   });
-  return new Entity(sprite,function(){
+  var temp =new Entity(sprite,function(){
     if(this.sprite.getAnimation()==='walk'){
-      this.sprite.setX(this.sprite.getX()+4*this.direction);
+      this.sprite.setX(this.sprite.getX()+speed*this.direction);
+      var temp = this.sprite.getX()+this.direction*this.sprite.getWidth();
+      if(temp>stage.getWidth() || temp< 0)
+        this.setDirection(-this.direction);
     }
   });
+  temp.setDirection((i%2)?1:-1);
+  return temp;
 }
 function init_game(){
-  enemies[0] = makeEnemy();
+  for(var i = 0; i < 8; i++){
+    enemies[i] = makeEnemy();
+  }
   red = new Kinetic.Sprite({
     x: 400,
     y: 100,
@@ -64,10 +73,15 @@ function init_game(){
   });
   background.add(red);
   background.add(orange);
-  background.add(enemies[0].sprite);
+  for(i = 0; i < 8; i++){
+    background.add(enemies[i].sprite);
+  }
   red.start();
   orange.start();
   enemies[0].sprite.start();
+  for(i = 0; i < 8; i++){
+    enemies[i].sprite.start();
+  }
   player = new Entity(red,function(){
     if(this.sprite.getAnimation()==='walk'){
       this.sprite.setX(this.sprite.getX()+4*this.direction);
@@ -79,5 +93,7 @@ function init_game(){
 }
 function loop(){
   player.ai();
-  enemies[0].ai();
+  for(i = 0; i < 8; i++){
+    enemies[i].ai();
+  }
 }
