@@ -20,7 +20,6 @@ function Entity(sprite,ai){
 }
 function makeEnemy(){
   var i = Math.floor(Math.random()*400);
-  var speed =  Math.random()*2+3;
   var frame = Math.floor(Math.random()*pirateanimation.walk.length);
   var sprite = new Kinetic.Sprite({
     x: i,
@@ -33,16 +32,33 @@ function makeEnemy(){
     width: 128,
     height:128
   });
-  var temp =new Entity(sprite,function(){
-    if(this.sprite.getAnimation()==='walk'){
-      this.sprite.setX(this.sprite.getX()+speed*this.direction);
-      var temp = this.sprite.getX()+this.direction*this.sprite.getWidth();
-      if(temp>stage.getWidth() || temp< 0)
-        this.setDirection(-this.direction);
-    }
-  });
+  var temp =new Entity(sprite,enemyAI);
+  temp.speed =  Math.random()*2+3;
   temp.setDirection((i%2)?1:-1);
   return temp;
+}
+function enemyAI(){
+  if(this.sprite.getAnimation()==='walk'){
+    this.sprite.setX(this.sprite.getX()+this.speed*this.direction);
+    var temp = this.sprite.getX()+this.direction*this.sprite.getWidth();
+    if(temp>1.1*stage.getWidth() || temp< -0.1*stage.getWidth())
+      this.setDirection(-this.direction);
+    this.sprite.setY(getYofFloor(this.sprite.getX()+0.45*this.direction*this.sprite.getWidth()-20));
+  }
+}
+function getYofFloor(x){
+  if(x > 945)
+    return 155;
+  else if(x > 900)
+    return -(x-900)+200;
+  else if(x > 133)
+    return 200;
+  else if(x > 69)
+    return (x-69)+145;
+  else if(x>-34)
+    return 145;
+  else
+    return 200;
 }
 function init_game(){
   pirateship = new Kinetic.Image({
