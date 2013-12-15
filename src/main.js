@@ -14,12 +14,16 @@ var shipsheet = new Image();
 shipsheet.onload = function(){
   start();
 };
+var backsheet = new Image();
+backsheet.onload = function(){
+  start();
+};
 piratesheet.src = 'assets/pirate.png';
 redsheet.src = 'assets/redcoat.png';
 orangesheet.src = 'assets/orange.png';
 shipsheet.src = 'assets/pirateship.png';
-
-var counter = 4;
+backsheet.src = 'assets/back.png';
+var counter = 5;
 var orange, pirate;
 function start(){
   counter--;

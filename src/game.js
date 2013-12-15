@@ -13,7 +13,7 @@ function Entity(sprite,ai){
   this.die = function(){
     this.sprite.setAnimation('death');
     var self = this;
-    this.sprite.afterFrame(player.sprite.getAnimations().death.length - 1,function(){
+    this.sprite.afterFrame(self.sprite.getAnimations().death.length - 1,function(){
       self.sprite.setAnimation('death_stay');
     });
   };
@@ -54,6 +54,15 @@ function init_game(){
         });
   ship.add(pirateship);
   ship.batchDraw();
+  back= new Kinetic.Image({
+          x: 0,
+          y: -125,
+          image: backsheet,
+          width: backsheet.width,
+          height: backsheet.height
+        });
+  background.add(back);
+  background.batchDraw();
   for(var i = 0; i < 8; i++){
     enemies[i] = makeEnemy();
   }
