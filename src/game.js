@@ -55,10 +55,8 @@ function getYofFloor(x){
     return 200;
   else if(x > 69)
     return (x-69)+145;
-  else if(x>-34)
-    return 145;
   else
-    return 200;
+    return 145;
 }
 function init_game(){
   pirateship = new Kinetic.Image({
@@ -83,8 +81,8 @@ function init_game(){
     enemies[i] = makeEnemy();
   }
   red = new Kinetic.Sprite({
-    x: 400,
-    y: 200,
+    x: 0,
+    y: 0,
     image: redsheet,
     animation: 'idle',
     animations: redanimation,
@@ -95,8 +93,8 @@ function init_game(){
     scale:1
   });
   orange = new Kinetic.Sprite({
-    x: 60,
-    y: 60,
+    x: 10,
+    y: -75,
     image: orangesheet,
     animation: 'idle',
     animations: orangeanimation,
@@ -105,8 +103,10 @@ function init_game(){
     width: 64,
     height:64
   });
-  people.add(red);
-  people.add(orange);
+  main.add(red);
+  main.add(orange);
+  main.setY(200);
+  main.setX(400);
   for(i = 0; i < 8; i++){
     people.add(enemies[i].sprite);
   }
@@ -118,21 +118,23 @@ function init_game(){
   }
   player = new Entity(red,function(){
     if(this.sprite.getAnimation()==='walk'){
-      this.sprite.setX(this.sprite.getX()+4*this.direction);
-  }
+      people.setX(people.getX()-8*this.direction);
+      ship.setX(ship.getX()-8*this.direction);
+    } 
   });
   currentlevel={"env":{}};
   init_bindings();
-  interval = window.setInterval(loop,50);
+  interval = window.setInterval(loop,100);
 }
 function loop(){
   player.ai();
   for(i = 0; i < 8; i++){
     enemies[i].ai();
   }
-  var temp = 30*Math.pow(Math.sin((k++)/25),2);
+  var temp = 30*Math.pow(Math.sin((k++)/12),2)||0;
   ship.setY(temp);
   ship.batchDraw();
   people.setY(temp);
+  main.setY(temp+getYofFloor(main.getX()-ship.getX()+player.sprite.getX()+0.45*player.direction*player.sprite.getWidth()-20));
 }
 var k = 0;

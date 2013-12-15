@@ -31,6 +31,7 @@ function start(){
     stage.add(background);
     stage.add(ship);
     stage.add(people);
+    stage.add(main);
     init_game();
   }
 }
@@ -42,3 +43,4 @@ var stage = new Kinetic.Stage({
 var background = new Kinetic.Layer();
 var ship = new Kinetic.Layer();
 var people = new Kinetic.Layer();
+var main = new Kinetic.Layer();
