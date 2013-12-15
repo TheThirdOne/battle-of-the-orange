@@ -71,10 +71,10 @@ function init_game(){
     width: 64,
     height:64
   });
-  background.add(red);
-  background.add(orange);
+  people.add(red);
+  people.add(orange);
   for(i = 0; i < 8; i++){
-    background.add(enemies[i].sprite);
+    people.add(enemies[i].sprite);
   }
   red.start();
   orange.start();
