@@ -19,47 +19,8 @@ var orange, pirate;
 function start(){
   counter--;
   if(counter === 0){
-    pirate = new Kinetic.Sprite({
-      x: 400,
-      y: 100,
-      image: piratesheet,
-      animation: 'walk',
-      animations: pirateanimation,
-      frameRate: 8,
-      index: 0,
-      width: 128,
-      height:128
-    });
-    red = new Kinetic.Sprite({
-      x: 400,
-      y: 100,
-      image: redsheet,
-      animation: 'idle',
-      animations: redanimation,
-      frameRate: 16,
-      index: 0,
-      width: 128,
-      height:128,
-      scale:1
-    });
-    orange = new Kinetic.Sprite({
-      x: 60,
-      y: 60,
-      image: orangesheet,
-      animation: 'idle',
-      animations: orangeanimation,
-      frameRate: 8,
-      index: 0,
-      width: 64,
-      height:64
-    });
-    background.add(red);
-    background.add(pirate);
-    background.add(orange);
-    red.start();
-    orange.start();
-    pirate.start();
     stage.add(background);
+    init_game();
   }
 }
 var stage = new Kinetic.Stage({
