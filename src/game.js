@@ -45,6 +45,15 @@ function makeEnemy(){
   return temp;
 }
 function init_game(){
+  pirateship = new Kinetic.Image({
+          x: -250,
+          y: -160,
+          image: shipsheet,
+          width: shipsheet.width,
+          height: shipsheet.height
+        });
+  ship.add(pirateship);
+  ship.batchDraw();
   for(var i = 0; i < 8; i++){
     enemies[i] = makeEnemy();
   }
@@ -98,6 +107,7 @@ function loop(){
   }
   var temp = 30*Math.pow(Math.sin((k++)/25),2);
   ship.setY(temp);
+  ship.batchDraw();
   people.setY(temp);
 }
 var k = 0;
