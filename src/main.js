@@ -20,7 +20,7 @@ function start(){
   counter--;
   if(counter === 0){
     stage.add(background);
-    stage.add(people);
+    stage.add(ship);
     init_game();
   }
 }
@@ -30,5 +30,5 @@ var stage = new Kinetic.Stage({
   height: 500
 });
 var background = new Kinetic.Layer();
-var people = new Kinetic.Layer();
+var ship = new Kinetic.Layer();
 var pirate= new Kinetic.Layer();
