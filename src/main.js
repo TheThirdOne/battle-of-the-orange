@@ -40,7 +40,7 @@ function start(){
       index: 0,
       width: 128,
       height:128,
-      scale:4
+      scale:1
     });
     orange = new Kinetic.Sprite({
       x: 60,

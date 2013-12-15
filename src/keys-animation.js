@@ -12,9 +12,9 @@ var red_a = {
   anims:[{name: 'idle', slides:[0]},
          {name: 'walk', slides:[0,0,1,1,2,2,3,3,4,4,1,1,2,2]},
          {name: 'attack', slides:[0,0,5,6,7,8,9,10,11,0]},
-         {name: 'death', slides:[0,12,13,14]},
-         {name: 'death_stay', slides:[14]}],
-         columns:4,rows:4,width:32,height:32};
+         {name: 'death', slides:[0,12,12,12,12,13]},
+         {name: 'death_stay', slides:[13]}],
+         columns:4,rows:4,width:128,height:128};
 var redanimation = AnimationSet(red_a);
 var orangeanimation = AnimationSet(orange_a);
 var pirateanimation = AnimationSet(pirate_a);

@@ -13,7 +13,7 @@ function Entity(sprite,ai){
   this.die = function(){
     this.sprite.setAnimation('death');
     var self = this;
-    this.sprite.afterFrame(3,function(){
+    this.sprite.afterFrame(player.sprite.getAnimations().death.length - 1,function(){
       self.sprite.setAnimation('death_stay');
     });
   };
@@ -21,7 +21,7 @@ function Entity(sprite,ai){
 function init_game(){
   player = new Entity(red,function(){
     if(this.sprite.getAnimation()==='walk'){
-    this.sprite.setX(this.sprite.getX()+4*this.direction)
+    this.sprite.setX(this.sprite.getX()+4*this.direction);
   }
   });
   currentlevel={"env":{}};
