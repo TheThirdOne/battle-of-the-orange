@@ -71,10 +71,10 @@ function init_game(){
     width: 64,
     height:64
   });
-  ship.add(red);
-  ship.add(orange);
+  people.add(red);
+  people.add(orange);
   for(i = 0; i < 8; i++){
-    ship.add(enemies[i].sprite);
+    people.add(enemies[i].sprite);
   }
   red.start();
   orange.start();
@@ -96,6 +96,8 @@ function loop(){
   for(i = 0; i < 8; i++){
     enemies[i].ai();
   }
-  ship.setY(30*Math.pow(Math.sin((k++)/25),2));
+  var temp = 30*Math.pow(Math.sin((k++)/25),2);
+  ship.setY(temp);
+  people.setY(temp);
 }
 var k = 0;
