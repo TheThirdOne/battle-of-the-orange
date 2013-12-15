@@ -6,7 +6,7 @@ function Entity(sprite,ai){
   this.setDirection = function(d){
     if(d === this.direction)
       return;
-    this.sprite.setX(this.sprite.getX()-0.8*d*this.sprite.getWidth());
+    this.sprite.setX(this.sprite.getX()-.65*d*this.sprite.getWidth());
     this.sprite.setScaleX(d);
     this.direction = d;
   };
