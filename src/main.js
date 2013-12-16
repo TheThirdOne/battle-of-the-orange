@@ -28,10 +28,6 @@ var orange, pirate;
 function start(){
   counter--;
   if(counter === 0){
-    stage.add(background);
-    stage.add(ship);
-    stage.add(people);
-    stage.add(main);
     init_game();
   }
 }

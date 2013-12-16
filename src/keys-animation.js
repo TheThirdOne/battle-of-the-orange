@@ -12,7 +12,7 @@ var red_a = {
   anims:[{name: 'idle', slides:[0]},
          {name: 'walk', slides:[0,0,1,1,2,2,3,3,4,4,1,1,2,2]},
          {name: 'attack', slides:[0,0,5,6,7,8,9,10,11,0]},
-         {name: 'death', slides:[0,12,12,12,12,13]},
+         {name: 'death', slides:[0,12,12,12,12,12,12,12,12,13]},
          {name: 'death_stay', slides:[13]}],
          columns:4,rows:4,width:128,height:128};
 var redanimation = AnimationSet(red_a);
@@ -42,10 +42,7 @@ function init_bindings(){
                 }
         };
         bindingsDown[bindings.space]=function(){
-          player.sprite.setAnimation('attack');
-          player.sprite.afterFrame(7,function(){
-            player.sprite.setAnimation('idle');
-          });
+          player.attack();
         };
         bindingsDown[bindings.left]=function(){
           player.sprite.setAnimation('walk');

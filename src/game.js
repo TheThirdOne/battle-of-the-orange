@@ -1,8 +1,9 @@
-var player, enemies = [], currentlevel, interval;
+var player, enemies = [], attacking=[], currentlevel, interval;
 function Entity(sprite,ai){
   this.sprite = sprite;
   this.ai = ai;
   this.direction = 1;
+  this.dead = false;
   this.setDirection = function(d){
     if(d === this.direction)
       return;
@@ -12,9 +13,18 @@ function Entity(sprite,ai){
   };
   this.die = function(){
     this.sprite.setAnimation('death');
+    this.dead = true;
     var self = this;
     this.sprite.afterFrame(self.sprite.getAnimations().death.length - 1,function(){
       self.sprite.setAnimation('death_stay');
+    });
+  };
+  this.attack = function(){
+    this.sprite.setAnimation('attack');
+    var self = this;
+    this.sprite.afterFrame(self.sprite.getAnimations().attack.length - 1,function(){
+      attacking.push(self);
+      self.sprite.setAnimation('idle');
     });
   };
 }
@@ -59,6 +69,10 @@ function getYofFloor(x){
     return 145;
 }
 function init_game(){
+  stage.add(background);
+  stage.add(ship);
+  stage.add(people);
+  stage.add(main);
   pirateship = new Kinetic.Image({
           x: -500,
           y: -450,
@@ -126,15 +140,38 @@ function init_game(){
   init_bindings();
   interval = window.setInterval(loop,100);
 }
+function getX(sprite,d){
+  return sprite.sprite.getX()+(d||0.45)*sprite.direction*sprite.sprite.getWidth();
+}
 function loop(){
-  player.ai();
-  for(i = 0; i < 8; i++){
-    enemies[i].ai();
+  if(!player.dead)player.ai();
+  for(var i = 0; i < 8; i++){
+    if(!enemies[i].dead)enemies[i].ai();
   }
+  var tmp = main.getX()-ship.getX()+getX(player);
+  for(i = 0; i < attacking.length; i++){
+    if(attacking[i]===player){
+      console.log('atc');
+      var t = tmp + player.direction*0.55*player.sprite.getWidth();
+      for(var j = 0; j < enemies.length;j++){
+        if(enemies[j].dead)continue;
+        var x1 = getX(enemies[j]) -35,x2 = getX(enemies[j])+30;
+        if(t>x1 && t<x2){
+          enemies[j].die();
+        }
+      }
+    }else{
+      var x1 = tmp -30,x2 = tmp+30;
+      if(getX(attacking[i],0.7)>x1 && getX(attacking[i],0.7)<x2){
+        player.die();
+      }
+    }
+  }
+  attacking = [];
   var temp = 30*Math.pow(Math.sin((k++)/12),2)||0;
   ship.setY(temp);
   ship.batchDraw();
   people.setY(temp);
-  main.setY(temp+getYofFloor(main.getX()-ship.getX()+player.sprite.getX()+0.45*player.direction*player.sprite.getWidth()-20));
+  main.setY(temp+getYofFloor(tmp-20));
 }
 var k = 0;
