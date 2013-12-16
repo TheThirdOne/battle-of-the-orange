@@ -58,15 +58,15 @@ function enemyAI(){
 }
 function getYofFloor(x){
   if(x > 945)
-    return 155;
+    return 160;
   else if(x > 900)
-    return -(x-900)+200;
+    return -(x-900)+205;
   else if(x > 133)
-    return 200;
+    return 205;
   else if(x > 69)
-    return (x-69)+145;
+    return (x-69)+155;
   else
-    return 145;
+    return 160;
 }
 function init_game(){
   stage.add(background);
